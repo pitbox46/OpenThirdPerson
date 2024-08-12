@@ -4,13 +4,12 @@ import github.pitbox46.openthirdperson.Config;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 /**
  * A normal Minecraft 3rd person camera
  */
-public class OTPCamera {
+public class OTPCam {
     /**
      * yaw, pitch, roll in degrees
      */
@@ -45,8 +44,20 @@ public class OTPCamera {
         return Config.CAM_DIST.get().floatValue();
     }
 
+    /**
+     * Handles the player (or camera) turning due to mouse movements
+     * @param player
+     * @param yRot
+     * @param xRot
+     */
     public void handleMouseMovement(LocalPlayer player, double yRot, double xRot) {
         player.turn(yRot, xRot);
+    }
+
+    /**
+     * Fired every tick
+     */
+    public void handlePlayerMovement(LocalPlayer player) {
     }
 
     public static boolean isCamDetached() {

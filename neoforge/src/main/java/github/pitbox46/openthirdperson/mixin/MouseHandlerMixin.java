@@ -16,6 +16,6 @@ public class MouseHandlerMixin {
 
     @Redirect(method = "turnPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;turn(DD)V"))
     private void onTurn(LocalPlayer instance, double yRot, double xRot) {
-        OpenThirdPerson.otpCamera.handleMouseMovement(instance, yRot, xRot);
+        OpenThirdPerson.otpCam.handleMouseMovement(instance, yRot, xRot);
     }
 }

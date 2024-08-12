@@ -1,10 +1,10 @@
 package github.pitbox46.openthirdperson;
 
+import github.pitbox46.openthirdperson.camera.DirectionalFreeCam;
 import github.pitbox46.openthirdperson.camera.LockedFreeCam;
-import github.pitbox46.openthirdperson.camera.OTPCamera;
+import github.pitbox46.openthirdperson.camera.OTPCam;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -24,14 +24,13 @@ public class Config {
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public enum Cameras {
-        VANILLA(OTPCamera::new),
-        LOCKED_FREE(LockedFreeCam::new);
+        VANILLA(OTPCam::new),
+        LOCKED_FREE(LockedFreeCam::new),
+        DIRECTIONAL_FREE(DirectionalFreeCam::new);
 
-        public final Supplier<OTPCamera> cameraSupplier;
-        Cameras(Supplier<OTPCamera> cameraSupplier) {
+        public final Supplier<OTPCam> cameraSupplier;
+        Cameras(Supplier<OTPCam> cameraSupplier) {
             this.cameraSupplier = cameraSupplier;
         }
-
-        public static final List<String> valuesAsString = Arrays.stream(values()).map(Enum::toString).toList();
     }
 }

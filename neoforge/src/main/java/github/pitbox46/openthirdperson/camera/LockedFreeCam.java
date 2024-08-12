@@ -9,7 +9,7 @@ import org.joml.Vector3f;
 /**
  * Allows the user to move the camera around freely when they're pressing a button (middlemouse default)
  */
-public class LockedFreeCam extends OTPCamera {
+public class LockedFreeCam extends OTPCam {
     @Override
     public boolean disableRearCamera() {
         return true;
