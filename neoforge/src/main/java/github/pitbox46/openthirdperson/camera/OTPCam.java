@@ -3,7 +3,9 @@ package github.pitbox46.openthirdperson.camera;
 import github.pitbox46.openthirdperson.Config;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
+import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import org.joml.Vector3f;
 
 /**
@@ -57,7 +59,7 @@ public class OTPCam {
     /**
      * Fired every tick
      */
-    public void handlePlayerMovement(LocalPlayer player) {
+    public void handlePlayerMovement(Input input) {
     }
 
     public static boolean isCamDetached() {

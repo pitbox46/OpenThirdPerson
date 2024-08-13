@@ -37,9 +37,9 @@ public class OpenThirdPerson {
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
     public static class ClientForgeEvents {
         @SubscribeEvent
-        public static void onPlayerTick(PlayerTickEvent.Pre event) {
-            if (OTPCam.isCamDetached() && event.getEntity() instanceof LocalPlayer player) {
-                otpCam.handlePlayerMovement(player);
+        public static void onInputUpdate(MovementInputUpdateEvent event) {
+            if (OTPCam.isCamDetached()) {
+                otpCam.handlePlayerMovement(event.getInput());
             }
         }
 
