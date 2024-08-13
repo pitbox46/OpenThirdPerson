@@ -17,8 +17,7 @@ public class Config {
                     Choose which camera to use
                     VANILLA - Normal Minecraft 3rd person
                     LOCKED_FREE - Move the camera freely when pressing a keybind
-                    CARDINAL - Move the camera freely all the time and only move in cardinal directions
-                    """)
+                    CARDINAL - Move the camera freely all the time and only move in cardinal directions""")
             .defineEnum(List.of("camera"), Cameras.VANILLA);
     public static final ModConfigSpec.DoubleValue CAM_DIST = BUILDER
             .comment("How far away the third person camera should be")
@@ -30,14 +29,12 @@ public class Config {
             .pop().push("Cardinal")
             .comment("""
                     True - Up will always send the player north, etc
-                    False - Up will always send you the direction you're facing, etc
-                    """)
+                    False - Up will always send you the direction you're facing, etc""")
             .define("cardinal_global", false);
     public static final ModConfigSpec.BooleanValue CARDINAL_AUTO_LOOK = BUILDER
             .comment("""
                     True - Left and right clicks will rotate you to the direction your camera is looking
-                    False - Only the bound camera button will rotate you (default middle mouse)
-                    """)
+                    False - Only the bound camera button will rotate you (default middle mouse)""")
             .define("cardinal_auto_look", true);
 
     static final ModConfigSpec SPEC = BUILDER.build();
