@@ -33,6 +33,12 @@ public class Config {
                     False - Up will always send you the direction you're facing, etc
                     """)
             .define("cardinal_global", false);
+    public static final ModConfigSpec.BooleanValue CARDINAL_AUTO_LOOK = BUILDER
+            .comment("""
+                    True - Left and right clicks will rotate you to the direction your camera is looking
+                    False - Only the bound camera button will rotate you (default middle mouse)
+                    """)
+            .define("cardinal_auto_look", true);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

@@ -5,7 +5,6 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
-import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import org.joml.Vector3f;
 
 /**

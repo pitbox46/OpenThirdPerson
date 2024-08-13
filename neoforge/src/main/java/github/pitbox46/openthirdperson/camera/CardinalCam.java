@@ -1,6 +1,7 @@
 package github.pitbox46.openthirdperson.camera;
 
 import github.pitbox46.openthirdperson.Config;
+import github.pitbox46.openthirdperson.OpenThirdPerson;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
@@ -19,6 +20,11 @@ public class CardinalCam extends OTPCam {
 
     @Override
     public Vector3f computeAngles(Camera camera, Vector3f pAngles) {
+        if (OpenThirdPerson.CAM_BUTTON.get().isDown()) {
+            LocalPlayer player = Minecraft.getInstance().player;
+            player.setYRot(angles.x);
+            player.setXRot(angles.y);
+        }
         return this.angles;
     }
 
@@ -54,8 +60,10 @@ public class CardinalCam extends OTPCam {
 
     @Override
     public void handleInteraction() {
-        LocalPlayer player = Minecraft.getInstance().player;
-        player.setYRot(angles.x);
-        player.setXRot(angles.y);
+        if (Config.CARDINAL_AUTO_LOOK.get()) {
+            LocalPlayer player = Minecraft.getInstance().player;
+            player.setYRot(angles.x);
+            player.setXRot(angles.y);
+        }
     }
 }

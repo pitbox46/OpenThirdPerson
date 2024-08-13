@@ -34,6 +34,6 @@ public class LockedFreeCam extends OTPCam {
     }
 
     public boolean isUnlocked() {
-        return OpenThirdPerson.MOVE_CAM.get().isDown();
+        return OpenThirdPerson.CAM_BUTTON.get().isDown();
     }
 }

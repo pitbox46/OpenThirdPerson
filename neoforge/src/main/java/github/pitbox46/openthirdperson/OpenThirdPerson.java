@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import github.pitbox46.openthirdperson.camera.OTPCam;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,7 +16,6 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.joml.Vector3f;
 import org.slf4j.Logger;
 
@@ -26,7 +24,7 @@ public class OpenThirdPerson {
     public static final String MODID = "openthirdperson";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final Lazy<KeyMapping> MOVE_CAM = Lazy.of(() -> new KeyMapping("key.openthirdperson.movecam", InputConstants.Type.MOUSE, 2, "key.openthirdperson.category"));
+    public static final Lazy<KeyMapping> CAM_BUTTON = Lazy.of(() -> new KeyMapping("key.openthirdperson.cam_button", InputConstants.Type.MOUSE, 2, "key.openthirdperson.category"));
     public static OTPCam otpCam = new OTPCam();
 
     public OpenThirdPerson(IEventBus modEventBus, ModContainer modContainer) {
@@ -73,7 +71,7 @@ public class OpenThirdPerson {
     static class ClientModEvents {
         @SubscribeEvent
         public static void registerBindings(RegisterKeyMappingsEvent event) {
-            event.register(MOVE_CAM.get());
+            event.register(CAM_BUTTON.get());
         }
 
         @SubscribeEvent
