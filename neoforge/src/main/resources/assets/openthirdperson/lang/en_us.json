@@ -1,5 +1,5 @@
 {
-  "openthirdperson.configuration.lock_cam": "Lock Camera",
+  "openthirdperson.configuration.camera": "Third Person Camera Mode",
   "openthirdperson.configuration.cam_sens": "Camera Sensitivity",
   "openthirdperson.configuration.cam_dist": "Camera Distance"
 }
