@@ -7,11 +7,11 @@ import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import org.joml.Vector3f;
 
-public class DirectionalFreeCam extends OTPCam {
+public class CardinalCam extends OTPCam {
+    protected float prevRot = 0;
+
     @Override
     public boolean disableRearCamera() {
         return true;
@@ -33,16 +33,19 @@ public class DirectionalFreeCam extends OTPCam {
 
     @Override
     public void handlePlayerMovement(Input input) {
+        LocalPlayer player = Minecraft.getInstance().player;
         Vec2 movement = input.getMoveVector();
         if (movement.lengthSquared() > 0) {
             float deg = (float) Mth.atan2(movement.x, movement.y) * -Mth.RAD_TO_DEG;
-            Minecraft.getInstance().player.setYRot(deg);
+            player.setYRot(prevRot + deg);
             input.up = false;
             input.down = false;
             input.right = false;
             input.left = false;
             input.forwardImpulse = 1;
             input.leftImpulse = 0;
+        } else {
+            prevRot = player.getYRot();
         }
     }
 }
