@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "horsecombatcontrols.refmap.json",
   "client": [
+    "CameraTypeMixin",
     "MouseHandlerMixin"
   ],
   "minVersion": "0.8"

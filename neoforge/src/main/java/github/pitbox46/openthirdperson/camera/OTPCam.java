@@ -22,7 +22,6 @@ public class OTPCam {
      * @return if the backwards facing third person option should be disabled
      */
     public boolean disableRearCamera() {
-        //TODO This
         return false;
     }
 
