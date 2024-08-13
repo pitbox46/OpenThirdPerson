@@ -12,6 +12,7 @@ public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.ConfigValue<Cameras> CAMERA = BUILDER
+            .push("General")
             .comment("""
                     Choose which camera to use
                     VANILLA - Normal Minecraft 3rd person
@@ -25,6 +26,13 @@ public class Config {
     public static final ModConfigSpec.DoubleValue CAM_SENS = BUILDER
             .comment("Sensitivity of the camera")
             .defineInRange("cam_sens", 1.0, 0, 64.0);
+    public static final ModConfigSpec.BooleanValue CARDINAL_GLOBAL = BUILDER
+            .pop().push("Cardinal")
+            .comment("""
+                    True - Up will always send the player north, etc
+                    False - Up will always send you the direction you're facing, etc
+                    """)
+            .define("cardinal_global", false);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

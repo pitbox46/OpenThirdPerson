@@ -44,6 +44,13 @@ public class OpenThirdPerson {
         }
 
         @SubscribeEvent
+        public static void onInteractionStart(InputEvent.InteractionKeyMappingTriggered event) {
+            if (OTPCam.isCamDetached() && event.isAttack() || event.isUseItem()) {
+                otpCam.handleInteraction();
+            }
+        }
+
+        @SubscribeEvent
         public static void setCameraAngles(ViewportEvent.ComputeCameraAngles event) {
             if (OTPCam.isCamDetached()) {
                 Vector3f angles = otpCam.computeAngles(

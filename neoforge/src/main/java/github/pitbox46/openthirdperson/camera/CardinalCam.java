@@ -37,6 +37,9 @@ public class CardinalCam extends OTPCam {
         Vec2 movement = input.getMoveVector();
         if (movement.lengthSquared() > 0) {
             float deg = (float) Mth.atan2(movement.x, movement.y) * -Mth.RAD_TO_DEG;
+            if (Config.CARDINAL_GLOBAL.get()) {
+                deg += 180;
+            }
             player.setYRot(prevRot + deg);
             input.up = false;
             input.down = false;
@@ -45,7 +48,14 @@ public class CardinalCam extends OTPCam {
             input.forwardImpulse = 1;
             input.leftImpulse = 0;
         } else {
-            prevRot = player.getYRot();
+            prevRot = Config.CARDINAL_GLOBAL.get() ? 0 : player.getYRot();
         }
+    }
+
+    @Override
+    public void handleInteraction() {
+        LocalPlayer player = Minecraft.getInstance().player;
+        player.setYRot(angles.x);
+        player.setXRot(angles.y);
     }
 }

@@ -1,5 +1,8 @@
 {
+  "openthirdperson.configuration.General": "General Settings",
   "openthirdperson.configuration.camera": "Third Person Camera Mode",
   "openthirdperson.configuration.cam_sens": "Camera Sensitivity",
-  "openthirdperson.configuration.cam_dist": "Camera Distance"
+  "openthirdperson.configuration.cam_dist": "Camera Distance",
+  "openthirdperson.configuration.Cardinal": "Cardinal Mode Settings",
+  "openthirdperson.configuration.cardinal_global": "Global Mode"
 }

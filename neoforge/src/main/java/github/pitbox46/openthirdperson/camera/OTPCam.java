@@ -57,9 +57,15 @@ public class OTPCam {
     }
 
     /**
-     * Fired every tick
+     * Handles player movement inputs
      */
     public void handlePlayerMovement(Input input) {
+    }
+
+    /**
+     * Handles left clicks
+     */
+    public void handleInteraction() {
     }
 
     public static boolean isCamDetached() {
