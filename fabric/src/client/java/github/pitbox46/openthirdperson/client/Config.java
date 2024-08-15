@@ -3,29 +3,41 @@ package github.pitbox46.openthirdperson.client;
 import github.pitbox46.openthirdperson.client.camera.CardinalCam;
 import github.pitbox46.openthirdperson.client.camera.LockedFreeCam;
 import github.pitbox46.openthirdperson.client.camera.OTPCam;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.List;
 import java.util.function.Supplier;
 
-@me.shedaniel.autoconfig.annotation.Config(name = OpenThirdPersonClient.MODID)
-public class Config implements ConfigData {
-    @ConfigEntry.Category("General")
-    @ConfigEntry.Gui.Tooltip
-    public Cameras camera = Cameras.VANILLA;
-    @ConfigEntry.Category("General")
-    @ConfigEntry.Gui.Tooltip
-    public double cam_dist = 4;
-    @ConfigEntry.Category("General")
-    @ConfigEntry.Gui.Tooltip
-    public double cam_sens = 1;
+public class Config {
+    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    @ConfigEntry.Category("Cardinal")
-    @ConfigEntry.Gui.Tooltip
-    public boolean cardinal_global = false;
-    @ConfigEntry.Category("Cardinal")
-    @ConfigEntry.Gui.Tooltip
-    public boolean cardinal_auto_look = true;
+    public static final ModConfigSpec.ConfigValue<Cameras> CAMERA = BUILDER
+            .push("General")
+            .comment("""
+                    Choose which camera to use
+                    VANILLA - Normal Minecraft 3rd person
+                    LOCKED_FREE - Move the camera freely when pressing a keybind
+                    CARDINAL - Move the camera freely all the time and only move in cardinal directions""")
+            .defineEnum(List.of("camera"), Cameras.VANILLA);
+    public static final ModConfigSpec.DoubleValue CAM_DIST = BUILDER
+            .comment("How far away the third person camera should be")
+            .defineInRange("cam_dist", 4.0, -64.0, 64.0);
+    public static final ModConfigSpec.DoubleValue CAM_SENS = BUILDER
+            .comment("Sensitivity of the camera")
+            .defineInRange("cam_sens", 1.0, 0, 64.0);
+    public static final ModConfigSpec.BooleanValue CARDINAL_GLOBAL = BUILDER
+            .pop().push("Cardinal")
+            .comment("""
+                    True - Up will always send the player north, etc
+                    False - Up will always send you the direction you're facing, etc""")
+            .define("cardinal_global", false);
+    public static final ModConfigSpec.BooleanValue CARDINAL_AUTO_LOOK = BUILDER
+            .comment("""
+                    True - Left and right clicks will rotate you to the direction your camera is looking
+                    False - Only the bound camera button will rotate you (default middle mouse)""")
+            .define("cardinal_auto_look", true);
+
+    static final ModConfigSpec SPEC = BUILDER.build();
 
     public enum Cameras {
         VANILLA(OTPCam::new),

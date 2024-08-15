@@ -1,16 +1,11 @@
 {
-  "text.autoconfig.openthirdperson.title": "Open Third Person",
-  "text.autoconfig.key.openthirdperson.cam_button": "Camera Button",
-  "text.autoconfig.openthirdperson.category.General": "General Settings",
-  "text.autoconfig.openthirdperson.option.camera": "Third Person Camera Mode",
-  "text.autoconfig.openthirdperson.option.camera.@Tooltip": "Choose which camera to use\nVANILLA - Normal Minecraft 3rd person\nLOCKED_FREE - Move the camera freely when pressing a keybind\nCARDINAL - Move the camera freely all the time and only move in cardinal directions",
-  "text.autoconfig.openthirdperson.option.cam_sens": "Camera Sensitivity",
-  "text.autoconfig.openthirdperson.option.cam_sens.@Tooltip": "Sensitivity of the camera",
-  "text.autoconfig.openthirdperson.option.cam_dist": "Camera Distance",
-  "text.autoconfig.openthirdperson.option.cam_dist.@Tooltip": "How far away the third person camera should be",
-  "text.autoconfig.openthirdperson.category.Cardinal": "Cardinal Mode Settings",
-  "text.autoconfig.openthirdperson.option.cardinal_global": "Global Mode",
-  "text.autoconfig.openthirdperson.option.cardinal_global.@Tooltip": "True - Up will always send the player north, etc\nFalse - Up will always send you the direction you're facing, etc",
-  "text.autoconfig.openthirdperson.option.cardinal_auto_look": "Auto Look",
-  "text.autoconfig.openthirdperson.option.cardinal_auto_look.@Tooltip": "True - Left and right clicks will rotate you to the direction your camera is looking\nFalse - Only the bound camera button will rotate you (default middle mouse)"
+  "key.openthirdperson.category": "Open Third Person",
+  "key.openthirdperson.cam_button": "Camera Button",
+  "openthirdperson.configuration.General": "General Settings",
+  "openthirdperson.configuration.camera": "Third Person Camera Mode",
+  "openthirdperson.configuration.cam_sens": "Camera Sensitivity",
+  "openthirdperson.configuration.cam_dist": "Camera Distance",
+  "openthirdperson.configuration.Cardinal": "Cardinal Mode Settings",
+  "openthirdperson.configuration.cardinal_global": "Global Mode",
+  "openthirdperson.configuration.cardinal_auto_look": "Auto Look"
 }

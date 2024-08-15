@@ -1,5 +1,6 @@
 package github.pitbox46.openthirdperson.client.camera;
 
+import github.pitbox46.openthirdperson.client.Config;
 import github.pitbox46.openthirdperson.client.OpenThirdPersonClient;
 import net.minecraft.client.Camera;
 import net.minecraft.client.player.LocalPlayer;
@@ -23,8 +24,8 @@ public class LockedFreeCam extends OTPCam {
     public void handleMouseMovement(LocalPlayer player, double yRot, double xRot) {
         if (isUnlocked()) {
             angles.add(
-                    (float) (yRot * 0.13 * OpenThirdPersonClient.config.cam_sens),
-                    (float) (xRot * 0.13 * OpenThirdPersonClient.config.cam_sens),
+                    (float) (yRot * 0.13 * Config.CAM_SENS.get()),
+                    (float) (xRot * 0.13 * Config.CAM_SENS.get()),
                     0
             );
         } else {

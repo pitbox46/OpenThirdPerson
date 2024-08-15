@@ -14,8 +14,7 @@
   "environment": "client",
   "entrypoints": {
     "client": ["github.pitbox46.openthirdperson.client.OpenThirdPersonClient"],
-    "main": ["github.pitbox46.openthirdperson.OpenThirdPerson"],
-    "modmenu": ["github.pitbox46.openthirdperson.client.OTPModMenu"]
+    "main": ["github.pitbox46.openthirdperson.OpenThirdPerson"]
   },
 
   "mixins": [

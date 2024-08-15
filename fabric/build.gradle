@@ -29,6 +29,10 @@ repositories {
     // for more information about repositories.
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+    maven {
+        name = "Fuzs Mod Resources"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+    }
 }
 
 dependencies {
@@ -40,7 +44,7 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modApi "me.shedaniel.cloth:cloth-config-fabric:15.0.130"
+    modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.0.8"
     modApi "com.terraformersmc:modmenu:11.0.1"
 }
 

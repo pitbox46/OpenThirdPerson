@@ -1,6 +1,5 @@
 package github.pitbox46.openthirdperson.client.camera;
 
-import github.pitbox46.openthirdperson.OpenThirdPerson;
 import github.pitbox46.openthirdperson.client.Config;
 import github.pitbox46.openthirdperson.client.OpenThirdPersonClient;
 import net.minecraft.client.Camera;
@@ -32,8 +31,8 @@ public class CardinalCam extends OTPCam {
     @Override
     public void handleMouseMovement(LocalPlayer player, double yRot, double xRot) {
         angles.add(
-                (float) (yRot * 0.13 * OpenThirdPersonClient.config.cam_sens),
-                (float) (xRot * 0.13 * OpenThirdPersonClient.config.cam_sens),
+                (float) (yRot * 0.13 * Config.CAM_SENS.get()),
+                (float) (xRot * 0.13 * Config.CAM_SENS.get()),
                 0
         );
     }
@@ -44,7 +43,7 @@ public class CardinalCam extends OTPCam {
         Vec2 movement = input.getMoveVector();
         if (movement.lengthSquared() > 0) {
             float deg = (float) Mth.atan2(movement.x, movement.y) * -Mth.RAD_TO_DEG;
-            if (OpenThirdPersonClient.config.cardinal_global) {
+            if (Config.CARDINAL_GLOBAL.get()) {
                 deg += 180;
             }
             player.setYRot(prevRot + deg);
@@ -55,13 +54,13 @@ public class CardinalCam extends OTPCam {
             input.forwardImpulse = 1;
             input.leftImpulse = 0;
         } else {
-            prevRot = OpenThirdPersonClient.config.cardinal_global ? 0 : player.getYRot();
+            prevRot = Config.CARDINAL_GLOBAL.get() ? 0 : player.getYRot();
         }
     }
 
     @Override
     public void handleInteraction() {
-        if (OpenThirdPersonClient.config.cardinal_auto_look) {
+        if (Config.CARDINAL_AUTO_LOOK.get()) {
             LocalPlayer player = Minecraft.getInstance().player;
             player.setYRot(angles.x);
             player.setXRot(angles.y);

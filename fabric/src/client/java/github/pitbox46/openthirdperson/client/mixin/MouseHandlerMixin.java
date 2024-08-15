@@ -1,7 +1,5 @@
 package github.pitbox46.openthirdperson.client.mixin;
 
-import github.pitbox46.openthirdperson.OpenThirdPerson;
-import github.pitbox46.openthirdperson.client.OpenThirdPersonClient;
 import github.pitbox46.openthirdperson.client.camera.OTPCam;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.player.LocalPlayer;

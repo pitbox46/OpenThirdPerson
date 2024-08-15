@@ -1,5 +1,6 @@
 package github.pitbox46.openthirdperson.client.camera;
 
+import github.pitbox46.openthirdperson.client.Config;
 import github.pitbox46.openthirdperson.client.OpenThirdPersonClient;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -41,7 +42,7 @@ public class OTPCam {
      * @return new distance
      */
     public float computeDist(Camera camera, float pDist) {
-        return (float) OpenThirdPersonClient.config.cam_dist;
+        return Config.CAM_DIST.get().floatValue();
     }
 
     /**
