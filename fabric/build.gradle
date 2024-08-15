@@ -44,8 +44,8 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:21.0.8"
-    modApi "com.terraformersmc:modmenu:11.0.1"
+    modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.fcapi_version}"
+    modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
