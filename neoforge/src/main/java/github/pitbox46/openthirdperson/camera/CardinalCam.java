@@ -61,9 +61,11 @@ public class CardinalCam extends OTPCam {
     @Override
     public void handleInteraction() {
         if (Config.CARDINAL_AUTO_LOOK.get()) {
+            Minecraft mc = Minecraft.getInstance();
             LocalPlayer player = Minecraft.getInstance().player;
             player.setYRot(angles.x);
             player.setXRot(angles.y);
+            mc.gameRenderer.pick(0);
         }
     }
 }
