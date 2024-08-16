@@ -3,6 +3,8 @@
   "key.openthirdperson.cam_button": "Camera Button",
   "openthirdperson.configuration.General": "General Settings",
   "openthirdperson.configuration.camera": "Third Person Camera Mode",
+  "openthirdperson.configuration.ride_camera": "Vehicle Camera Mode",
+  "openthirdperson.configuration.smooth_transition": "Smooth Transition",
   "openthirdperson.configuration.cam_sens": "Camera Sensitivity",
   "openthirdperson.configuration.cam_dist": "Camera Distance",
   "openthirdperson.configuration.Cardinal": "Cardinal Mode Settings",
