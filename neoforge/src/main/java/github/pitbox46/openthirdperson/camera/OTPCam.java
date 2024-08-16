@@ -26,11 +26,12 @@ public class OTPCam {
     }
 
     /**
-     * @param camera minecraft camera
-     * @param pAngles normal yaw, pitch, roll
+     * @param camera      minecraft camera
+     * @param pAngles     normal yaw, pitch, roll
+     * @param partialTick
      * @return new yaw, pitch, roll
      */
-    public Vector3f computeAngles(Camera camera, Vector3f pAngles) {
+    public Vector3f computeAngles(Camera camera, Vector3f pAngles, float partialTick) {
         this.angles = pAngles;
         return pAngles;
     }
@@ -65,6 +66,11 @@ public class OTPCam {
      */
     public void handleInteraction() {
     }
+
+    /**
+     * Called at the beginning of client tick
+     */
+    public void tick() {}
 
     public static boolean isCamDetached() {
         Minecraft mc = Minecraft.getInstance();

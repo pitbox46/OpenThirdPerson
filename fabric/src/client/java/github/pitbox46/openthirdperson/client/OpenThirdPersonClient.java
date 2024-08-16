@@ -6,6 +6,7 @@ import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeModConfigEvents;
 import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.client.ConfigScreenFactoryRegistry;
 import github.pitbox46.openthirdperson.client.camera.OTPCam;
+import github.pitbox46.openthirdperson.client.camera.TransitionCam;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -22,15 +23,15 @@ public class OpenThirdPersonClient implements ClientModInitializer {
     /**
      * The camera normally in use
      */
-    public static OTPCam normalOTPCam = new OTPCam();
+    public static OTPCam normalOTPCam = null;
     /**
      * Camera when player is a passenger
      */
-    public static OTPCam rideOTPCam = new OTPCam();
+    public static OTPCam rideOTPCam = null;
     /**
      * Current selected camera
      */
-    public static OTPCam currentOTPCam = normalOTPCam;
+    public static TransitionCam camera = new TransitionCam(new OTPCam());
 
     @Override
     public void onInitializeClient() {
@@ -39,20 +40,29 @@ public class OpenThirdPersonClient implements ClientModInitializer {
         ConfigScreenFactoryRegistry.INSTANCE.register(MODID, ConfigurationScreen::new);
 
         ClientTickEvents.START_CLIENT_TICK.register((client -> {
-            if (client.player != null && client.player.isPassenger()) {
-                currentOTPCam = rideOTPCam;
-            } else {
-                currentOTPCam = normalOTPCam;
+            if (normalOTPCam == null || rideOTPCam == null) {
+                normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
+                rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
+            }
+            if (client.player != null) {
+                if (client.player.isPassenger()) {
+                    camera.changeCamera(rideOTPCam);
+                } else {
+                    camera.changeCamera(normalOTPCam);
+                }
+                camera.tick();
             }
         }));
 
         NeoForgeModConfigEvents.loading(MODID).register(config -> {
             normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
             rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
+            camera = new TransitionCam(normalOTPCam);
         });
         NeoForgeModConfigEvents.reloading(MODID).register(config -> {
             normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
             rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
+            camera = new TransitionCam(normalOTPCam);
         });
     }
 }

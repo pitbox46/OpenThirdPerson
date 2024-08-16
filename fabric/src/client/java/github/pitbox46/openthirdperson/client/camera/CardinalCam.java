@@ -19,7 +19,7 @@ public class CardinalCam extends OTPCam {
     }
 
     @Override
-    public Vector3f computeAngles(Camera camera, Vector3f pAngles) {
+    public Vector3f computeAngles(Camera camera, Vector3f pAngles, float partialTick) {
         if (OpenThirdPersonClient.CAM_BUTTON.isDown()) {
             LocalPlayer player = Minecraft.getInstance().player;
             player.setYRot(angles.x);

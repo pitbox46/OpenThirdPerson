@@ -17,7 +17,7 @@ public abstract class CameraTypeMixin {
 
     @Inject(method = "cycle", at = @At("RETURN"), cancellable = true)
     public void onCycle(CallbackInfoReturnable<CameraType> cir) {
-        if (OpenThirdPerson.currentOTPCam.disableRearCamera() && cir.getReturnValue().ordinal() == 2) {
+        if (OpenThirdPerson.camera.disableRearCamera() && cir.getReturnValue().ordinal() == 2) {
             cir.setReturnValue(CameraType.FIRST_PERSON);
         }
     }

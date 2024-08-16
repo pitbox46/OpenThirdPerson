@@ -8,21 +8,21 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static github.pitbox46.openthirdperson.client.OpenThirdPersonClient.normalOTPCam;
+import static github.pitbox46.openthirdperson.client.OpenThirdPersonClient.camera;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
     @Inject(method = "startAttack", at = @At("HEAD"))
     private void onAttack(CallbackInfoReturnable<Boolean> cir) {
         if (OTPCam.isCamDetached()) {
-            normalOTPCam.handleInteraction();
+            camera.handleInteraction();
         }
     }
 
     @Inject(method = "startUseItem", at = @At("HEAD"))
     private void onUseItem(CallbackInfo ci) {
         if (OTPCam.isCamDetached()) {
-            normalOTPCam.handleInteraction();
+            camera.handleInteraction();
         }
     }
 }

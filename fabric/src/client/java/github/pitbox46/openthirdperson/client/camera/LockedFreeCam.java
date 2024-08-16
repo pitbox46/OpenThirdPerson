@@ -16,7 +16,7 @@ public class LockedFreeCam extends OTPCam {
     }
 
     @Override
-    public Vector3f computeAngles(Camera camera, Vector3f pAngles) {
+    public Vector3f computeAngles(Camera camera, Vector3f pAngles, float partialTick) {
         return this.angles;
     }
 
