@@ -19,7 +19,7 @@ public class OpenThirdPersonClient implements ClientModInitializer {
     public static final String MODID = "openthirdperson";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final KeyMapping CAM_BUTTON = new KeyMapping("key.openthirdperson.cam_button", InputConstants.Type.MOUSE, 2, "key.openthirdperson.category");
+    public static final KeyMapping CAM_BUTTON = new KeyMapping("key.openthirdperson.cam_button", InputConstants.Type.KEYSYM, 342, "key.openthirdperson.category");
     /**
      * The camera normally in use
      */
