@@ -27,7 +27,7 @@ public class OpenThirdPerson {
     public static final String MODID = "openthirdperson";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final Lazy<KeyMapping> CAM_BUTTON = Lazy.of(() -> new KeyMapping("key.openthirdperson.cam_button", InputConstants.Type.MOUSE, 2, "key.openthirdperson.category"));
+    public static final Lazy<KeyMapping> CAM_BUTTON = Lazy.of(() -> new KeyMapping("key.openthirdperson.cam_button", InputConstants.Type.KEYSYM, 342, "key.openthirdperson.category"));
     /**
      * The camera normally in use
      */
