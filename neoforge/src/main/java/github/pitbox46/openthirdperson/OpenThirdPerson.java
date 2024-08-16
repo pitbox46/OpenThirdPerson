@@ -16,6 +16,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.joml.Vector3f;
 import org.slf4j.Logger;
 
@@ -25,7 +26,18 @@ public class OpenThirdPerson {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final Lazy<KeyMapping> CAM_BUTTON = Lazy.of(() -> new KeyMapping("key.openthirdperson.cam_button", InputConstants.Type.MOUSE, 2, "key.openthirdperson.category"));
-    public static OTPCam otpCam = new OTPCam();
+    /**
+     * The camera normally in use
+     */
+    public static OTPCam normalOTPCam = new OTPCam();
+    /**
+     * Camera when player is a passenger
+     */
+    public static OTPCam rideOTPCam = new OTPCam();
+    /**
+     * Current selected camera
+     */
+    public static OTPCam currentOTPCam = normalOTPCam;
 
     public OpenThirdPerson(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
@@ -35,23 +47,32 @@ public class OpenThirdPerson {
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
     public static class ClientForgeEvents {
         @SubscribeEvent
+        public static void onPlayerTick(PlayerTickEvent.Pre event) {
+            if (event.getEntity().isPassenger()) {
+                currentOTPCam = rideOTPCam;
+            } else {
+                currentOTPCam = normalOTPCam;
+            }
+        }
+
+        @SubscribeEvent
         public static void onInputUpdate(MovementInputUpdateEvent event) {
             if (OTPCam.isCamDetached()) {
-                otpCam.handlePlayerMovement(event.getInput());
+                currentOTPCam.handlePlayerMovement(event.getInput());
             }
         }
 
         @SubscribeEvent
         public static void onInteractionStart(InputEvent.InteractionKeyMappingTriggered event) {
             if (OTPCam.isCamDetached() && event.isAttack() || event.isUseItem()) {
-                otpCam.handleInteraction();
+                currentOTPCam.handleInteraction();
             }
         }
 
         @SubscribeEvent
         public static void setCameraAngles(ViewportEvent.ComputeCameraAngles event) {
             if (OTPCam.isCamDetached()) {
-                Vector3f angles = otpCam.computeAngles(
+                Vector3f angles = currentOTPCam.computeAngles(
                         event.getCamera(),
                         new Vector3f(event.getYaw(), event.getPitch(), event.getRoll())
                 );
@@ -63,7 +84,7 @@ public class OpenThirdPerson {
 
         @SubscribeEvent
         public static void setDetachedCameraDist(CalculateDetachedCameraDistanceEvent event) {
-            event.setDistance(otpCam.computeDist(event.getCamera(), event.getDistance()));
+            event.setDistance(currentOTPCam.computeDist(event.getCamera(), event.getDistance()));
         }
     }
 
@@ -76,12 +97,14 @@ public class OpenThirdPerson {
 
         @SubscribeEvent
         public static void configListener(ModConfigEvent.Loading event) {
-            otpCam = Config.CAMERA.get().cameraSupplier.get();
+            normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
+            rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
         }
 
         @SubscribeEvent
         public static void configListener(ModConfigEvent.Reloading event) {
-            otpCam = Config.CAMERA.get().cameraSupplier.get();
+            normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
+            rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
         }
     }
 }

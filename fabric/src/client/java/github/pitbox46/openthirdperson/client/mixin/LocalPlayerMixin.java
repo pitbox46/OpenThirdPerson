@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static github.pitbox46.openthirdperson.client.OpenThirdPersonClient.otpCam;
+import static github.pitbox46.openthirdperson.client.OpenThirdPersonClient.normalOTPCam;
 
 @Mixin(LocalPlayer.class)
 public class LocalPlayerMixin {
@@ -18,7 +18,7 @@ public class LocalPlayerMixin {
     @Inject(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/tutorial/Tutorial;onInput(Lnet/minecraft/client/player/Input;)V"))
     private void onMovementInputUpdate(CallbackInfo ci) {
         if (OTPCam.isCamDetached()) {
-            otpCam.handlePlayerMovement(input);
+            normalOTPCam.handlePlayerMovement(input);
         }
     }
 }

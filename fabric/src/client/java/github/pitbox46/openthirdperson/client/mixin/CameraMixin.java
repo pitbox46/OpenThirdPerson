@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static github.pitbox46.openthirdperson.client.OpenThirdPersonClient.otpCam;
+import static github.pitbox46.openthirdperson.client.OpenThirdPersonClient.normalOTPCam;
 
 @Mixin(Camera.class)
 public abstract class CameraMixin {
@@ -24,7 +24,7 @@ public abstract class CameraMixin {
     @Inject(method = "setup", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setPosition(DDD)V"))
     private void setRotation(BlockGetter blockGetter, Entity entity, boolean bl, boolean bl2, float f, CallbackInfo ci) {
         if (OTPCam.isCamDetached()) {
-            Vector3f angles = otpCam.computeAngles(
+            Vector3f angles = normalOTPCam.computeAngles(
                     (Camera) (Object) this,
                     new Vector3f(this.yRot, this.xRot, 0)
             );
@@ -34,6 +34,6 @@ public abstract class CameraMixin {
 
     @ModifyVariable(method = "getMaxZoom", argsOnly = true, at = @At(value = "LOAD", ordinal = 0))
     private float modifyMaxZoom(float zoom) {
-        return otpCam.computeDist((Camera) (Object) this, zoom);
+        return normalOTPCam.computeDist((Camera) (Object) this, zoom);
     }
 }

@@ -19,6 +19,13 @@ public class Config {
                     LOCKED_FREE - Move the camera freely when pressing a keybind
                     CARDINAL - Move the camera freely all the time and only move in cardinal directions""")
             .defineEnum(List.of("camera"), Cameras.VANILLA);
+    public static final ModConfigSpec.ConfigValue<Cameras> RIDE_CAMERA = BUILDER
+            .comment("""
+                    Choose which camera to use for vehicles
+                    VANILLA - Normal Minecraft 3rd person
+                    LOCKED_FREE - Move the camera freely when pressing a keybind
+                    CARDINAL - Move the camera freely all the time and only move in cardinal directions""")
+            .defineEnum(List.of("ride_camera"), Cameras.VANILLA);
     public static final ModConfigSpec.DoubleValue CAM_DIST = BUILDER
             .comment("How far away the third person camera should be")
             .defineInRange("cam_dist", 4.0, -64.0, 64.0);
