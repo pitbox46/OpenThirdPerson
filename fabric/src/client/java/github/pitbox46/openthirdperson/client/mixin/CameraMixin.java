@@ -34,7 +34,7 @@ public abstract class CameraMixin {
     }
 
     @ModifyVariable(method = "getMaxZoom", argsOnly = true, at = @At(value = "LOAD", ordinal = 0))
-    private float modifyMaxZoom(float zoom) {
-        return camera.computeDist((Camera) (Object) this, zoom);
+    private double modifyMaxZoom(double zoom) {
+        return camera.computeDist((Camera) (Object) this, (float) zoom);
     }
 }

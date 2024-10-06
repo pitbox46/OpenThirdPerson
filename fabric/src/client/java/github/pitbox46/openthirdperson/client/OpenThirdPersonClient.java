@@ -2,17 +2,15 @@ package github.pitbox46.openthirdperson.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeModConfigEvents;
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.client.ConfigScreenFactoryRegistry;
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;
 import github.pitbox46.openthirdperson.client.camera.OTPCam;
 import github.pitbox46.openthirdperson.client.camera.TransitionCam;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.minecraftforge.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 public class OpenThirdPersonClient implements ClientModInitializer {
@@ -36,8 +34,7 @@ public class OpenThirdPersonClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         KeyBindingHelper.registerKeyBinding(CAM_BUTTON);
-        NeoForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.CLIENT, Config.SPEC);
-        ConfigScreenFactoryRegistry.INSTANCE.register(MODID, ConfigurationScreen::new);
+        ForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.CLIENT, Config.SPEC);
 
         ClientTickEvents.START_CLIENT_TICK.register((client -> {
             if (normalOTPCam == null || rideOTPCam == null) {
@@ -54,12 +51,12 @@ public class OpenThirdPersonClient implements ClientModInitializer {
             }
         }));
 
-        NeoForgeModConfigEvents.loading(MODID).register(config -> {
+        ModConfigEvents.loading(MODID).register(config -> {
             normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
             rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
             camera = new TransitionCam(normalOTPCam);
         });
-        NeoForgeModConfigEvents.reloading(MODID).register(config -> {
+        ModConfigEvents.reloading(MODID).register(config -> {
             normalOTPCam = Config.CAMERA.get().cameraSupplier.get();
             rideOTPCam = Config.RIDE_CAMERA.get().cameraSupplier.get();
             camera = new TransitionCam(normalOTPCam);

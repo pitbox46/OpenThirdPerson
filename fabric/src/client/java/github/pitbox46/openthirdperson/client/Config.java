@@ -3,15 +3,15 @@ package github.pitbox46.openthirdperson.client;
 import github.pitbox46.openthirdperson.client.camera.CardinalCam;
 import github.pitbox46.openthirdperson.client.camera.LockedFreeCam;
 import github.pitbox46.openthirdperson.client.camera.OTPCam;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ModConfigSpec.ConfigValue<Cameras> CAMERA = BUILDER
+    public static final ForgeConfigSpec.ConfigValue<Cameras> CAMERA = BUILDER
             .push("General")
             .comment("""
                     Choose which camera to use
@@ -19,35 +19,35 @@ public class Config {
                     LOCKED_FREE - Move the camera freely when pressing a keybind
                     CARDINAL - Move the camera freely all the time and only move in cardinal directions""")
             .defineEnum(List.of("camera"), Cameras.VANILLA);
-    public static final ModConfigSpec.ConfigValue<Cameras> RIDE_CAMERA = BUILDER
+    public static final ForgeConfigSpec.ConfigValue<Cameras> RIDE_CAMERA = BUILDER
             .comment("""
                     Choose which camera to use for vehicles
                     VANILLA - Normal Minecraft 3rd person
                     LOCKED_FREE - Move the camera freely when pressing a keybind
                     CARDINAL - Move the camera freely all the time and only move in cardinal directions""")
             .defineEnum(List.of("ride_camera"), Cameras.VANILLA);
-    public static final ModConfigSpec.BooleanValue SMOOTH_TRANSITION = BUILDER
+    public static final ForgeConfigSpec.BooleanValue SMOOTH_TRANSITION = BUILDER
             .comment("Smoothly transitions between camera and ride_camera")
             .define("smooth_transition", true);
-    public static final ModConfigSpec.DoubleValue CAM_DIST = BUILDER
+    public static final ForgeConfigSpec.DoubleValue CAM_DIST = BUILDER
             .comment("How far away the third person camera should be")
             .defineInRange("cam_dist", 4.0, -64.0, 64.0);
-    public static final ModConfigSpec.DoubleValue CAM_SENS = BUILDER
+    public static final ForgeConfigSpec.DoubleValue CAM_SENS = BUILDER
             .comment("Sensitivity of the camera")
             .defineInRange("cam_sens", 1.0, 0, 64.0);
-    public static final ModConfigSpec.BooleanValue CARDINAL_GLOBAL = BUILDER
+    public static final ForgeConfigSpec.BooleanValue CARDINAL_GLOBAL = BUILDER
             .pop().push("Cardinal")
             .comment("""
                     True - Up will always send the player north, etc
                     False - Up will always send you the direction you're facing, etc""")
             .define("cardinal_global", false);
-    public static final ModConfigSpec.BooleanValue CARDINAL_AUTO_LOOK = BUILDER
+    public static final ForgeConfigSpec.BooleanValue CARDINAL_AUTO_LOOK = BUILDER
             .comment("""
                     True - Left and right clicks will rotate you to the direction your camera is looking
                     False - Only the bound camera button will rotate you (default middle mouse)""")
             .define("cardinal_auto_look", true);
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public enum Cameras {
         VANILLA(OTPCam::new),
