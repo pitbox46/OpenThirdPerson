@@ -88,11 +88,6 @@ public class OpenThirdPerson {
                 event.setRoll(angles.z);
             }
         }
-
-        @SubscribeEvent
-        public static void setDetachedCameraDist(CalculateDetachedCameraDistanceEvent event) {
-            event.setDistance(camera.computeDist(event.getCamera(), event.getDistance()));
-        }
     }
 
     @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD, modid = MODID)

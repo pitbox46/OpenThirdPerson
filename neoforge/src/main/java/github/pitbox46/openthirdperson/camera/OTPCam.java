@@ -15,6 +15,10 @@ public class OTPCam {
      * yaw, pitch, roll in degrees
      */
     protected Vector3f angles = new Vector3f(0, 0, 0);
+    /**
+     * x, y, z offset from normal camera position
+     */
+    protected Vector3f offset = new Vector3f(0, 0, 0);
 
     /**
      * Disables the rear facing third person option.
@@ -34,6 +38,17 @@ public class OTPCam {
     public Vector3f computeAngles(Camera camera, Vector3f pAngles, float partialTick) {
         this.angles = pAngles;
         return pAngles;
+    }
+
+    /**
+     *
+     * @param camera - minecraft camera
+     * @param offset - camera offset from the player
+     * @return New offset. Applied after rotations are applied. Calculations will be applied to this value so it doesn't clip beyond blocks
+     */
+    public Vector3f computeOffset(Camera camera, Vector3f offset) {
+        this.offset = offset.setComponent(0, computeDist(camera, offset.x));
+        return  offset;
     }
 
     /**
