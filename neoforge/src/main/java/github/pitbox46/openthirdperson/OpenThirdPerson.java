@@ -70,7 +70,7 @@ public class OpenThirdPerson {
 
         @SubscribeEvent
         public static void onInteractionStart(InputEvent.InteractionKeyMappingTriggered event) {
-            if (camera.isCamDetached() && event.isAttack() || event.isUseItem()) {
+            if (camera.isCamDetached() && (event.isAttack() || event.isUseItem())) {
                 camera.handleInteraction();
             }
         }
